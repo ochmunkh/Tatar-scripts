@@ -91,8 +91,11 @@ cd C:\Path\To\Script
 🧩 Техникийн шаардлага
 
 Windows 10 / Windows 11
+
 PowerShell 5.1+ (PowerShell 7 дэмжинэ)
+
 Administrator privilege (recommended)
 
 Enkhbat.O
+
 Senior Security Analyst — Cybersecurity & Forensics
