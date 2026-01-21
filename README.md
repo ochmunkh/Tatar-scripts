@@ -1,83 +1,91 @@
-🕵️ Windows Forensic Triage — README
+<img width="676" height="608" alt="image" src="https://github.com/user-attachments/assets/a174cfb3-4690-4b3e-985b-7e11d70d8454" />
 
-WinQuickTriage_Enhanced.ps1 — Windows систем дээр хурдан forensic triage хийх PowerShell скрипт. Системийн, хэрэглэгчийн, сүлжээ, аюулгүй байдлын үндсэн мэдээллийг цуглуулж тайлан үүсгэнэ.
+🕵️ Windows систем дээр хурдан, аюулгүй forensic triage хийх PowerShell скрипт
+Tatar_Quick_Triage.ps1 нь Windows endpoint дээр анхны forensic / incident response triage хийхэд зориулагдсан. Скрипт нь системийн, хэрэглэгчийн, процесс, сүлжээ, registry, event log болон browser artifact зэрэг чухал мэдээллүүдийг read-only / copy-only аргаар цуглуулж, нэгтгэсэн тайлан үүсгэнэ.
 
-⚠️ Чухал: Скан дуусахаас өмнө машин унтраах, restart хийхгүй байх. Сканад бүрэн нэвтрэхийн тулд Administrator эрх хэрэгтэй.
 
-🔎 Товч танилцуулга
+⚠️ Анхааруулга
+Скан дуусахаас өмнө компьютерийг унтраах, restart хийхийг хориглоно.
+Administrator эрхтэй ажиллуулахыг зөвлөж байна (зарим artifact admin эрхгүй үед бүрэн лог цуглуулж чадахгүй)
 
-Зорилго: Анхны forensic/incident-response цуглуулга (triage) хийх — хурдан, хэрэглэгч төвтэй.
 
-Гаралт файлууд: C:\Forensic\<HOST>_<YYYY-MM-DD_HH-mm>\WinQuickTriage_<HOST>_<date>.txt болон BrowserArtifacts хавтсанд файлуудыг хуулна.
+🔎 Зорилго
+🚑 Incident Response – Initial Triage
+🧪 Malware / Suspicious activity detection (quick visibility)
+🧾 Forensic evidence preservation (copy-only approach)
+⏱️ Fast & user-focused (production endpoint-д аюул багатай)
 
-Анхаар: Скрипт saved passwords-ыг тайлж гаргахгүй. Хэрвээ Login Data / logins.json файлыг КОПИ хийж авбал тэнд нуугдсан/шифрлэгдсэн өгөгдөл байж болно — энэ скрипт тэдгээрийг задлахгүй.
+Гаралт (Output Structure)
+C:\Forensic\
+ └─ <HOSTNAME>_<YYYY-MM-DD_HH-mm>\
+    ├─ WinQuickTriage_<HOST>_<DATE>.txt
+    ├─ BrowserArtifacts\
+    │   └─ browser_artifacts_summary.txt
+    ├─ RegistryHives\
+    ├─ EventLogs\
+    ├─ dns_cache.txt
+    ├─ arp.txt
+    ├─ manifest_hashes.csv
+    └─ (optional) Forensic_<HOST>_<DATE>.zip
 
-⚙️ Гол функцууд (өндөр түвшинд)
+Гол боломжууд
+🖥️ System & User
+OS info, uptime, hostname
+User accounts, admin group, active sessions
+Installed applications
 
-System info, uptime, OS
+⚙️ Process & Persistence
+Running processes (PID, command line, parent)
+Suspicious process pattern detection
+Startup items, scheduled tasks, services
+Prefetch files
 
-User accounts, current sessions
+🌐 Network
+Active TCP connections (PID mapping)
+netstat, ARP, routing table
+DNS cache dump
+Firewall profiles & rules
 
-Running processes (top CPU)
+🧾 Logs & Registry
+Security Event Logs (4624, 4688)
+Full EVTX export (Security, System, Application, Sysmon)
+Registry hives (SYSTEM, SAM, SECURITY, SOFTWARE)
+NTUSER.DAT copy (all users)
 
-Startup/autorun items, scheduled tasks, services
-
-Network connections (netstat / TCP), ARP, routing
-
-Security event log — сүүлийн logon эвэнтүүд (4624)
-
+📜 PowerShell & Scripts
 PowerShell history
+Transcript search
+Obfuscated script quick-scan (IEX, Base64, Invoke-Expression…)
 
-Obfuscated script quick-scan (user folders only)
+🌍 Browser Artifacts (Safe mode)
+Chrome / Edge / Firefox profiles
+SQLite / JSON / History files
 
-Hosts file, shadow copies
+⚠️ Passwords NOT decrypted
 
-Installed applications, installed updates
-
-Drivers, firewall status & rules
-
-Browser artifacts: profile files, history/bookmarks (copied only — passwords NOT extracted)
-
-Recent files (user) — сүүлийн 7 хоног гэх мэт
-
-(Бараг 20+ artifact; дэлгэрэнгүйг скриптийг эндээс харна.)
-
-🧾 Гаралт
-
-Текст тайлан: C:\Forensic\WinQuickTriage_<hostname>_<date>.txt
-
-Хэрвээ байвал браузерийн профайл файлууд: C:\Forensic\<hostname>_<date>\BrowserArtifacts\
-
-🚀 Ашиглах заавар (админ эрхтэй)
-
-PowerShell-ийг администратор байдлаар нээнэ
-
-Start Menu → Windows PowerShell (эсвэл PowerShell) → Right-click → Run as administrator
-
-Эсвэл энгийн PowerShell-ээс elevated терминал нээх:
-
+🚀 Ашиглах заавар
+1️⃣ PowerShell-ийг Administrator-аар нээх
+Start Menu → Windows PowerShell → Right-click → Run as administrator
+эсвэл:
 Start-Process powershell -Verb RunAs
 
-
-Execution policy-г түр хугацаанд нээх (хэрэв шаардлагатай бол)
-(цор ганц session-д хүчинтэй)
-
+2️⃣ Execution Policy (session-only)
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
 
-
-Скрипт ажиллуулах
-Скрипт байрлах хавтсанд шилжээд:
-
+3️⃣ Скрипт ажиллуулах
 cd C:\Path\To\Script
-.\WinQuickTriage_Enhanced.ps1
+.\Tatar_Quick_Triage.ps1
+📝 Main report: WinQuickTriage_<HOST>_<DATE>.txt
 
-📌 Техникийн шаардлага
 
-Windows 10 / Windows 11 ; PowerShell 5.1+ (PowerShell 7 зөвшөөрнө)
+🧩 Техникийн шаардлага
+Windows 10 / Windows 11
+PowerShell 5.1+ (PowerShell 7 дэмжинэ)
+Administrator privilege (recommended)
 
-Администратор эрх
-
-✍️ Зохиогч
+Enkhbat.O
+Senior Security Analyst
+Cybersecurity • Incident Response • Digital Forensics
 
 Enkhbat.O
 Senior Security Analyst — Cybersecurity & Forensics
