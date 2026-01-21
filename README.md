@@ -84,8 +84,4 @@ PowerShell 5.1+ (PowerShell 7 дэмжинэ)
 Administrator privilege (recommended)
 
 Enkhbat.O
-Senior Security Analyst
-Cybersecurity • Incident Response • Digital Forensics
-
-Enkhbat.O
 Senior Security Analyst — Cybersecurity & Forensics
