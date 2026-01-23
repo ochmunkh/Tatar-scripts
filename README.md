@@ -1,6 +1,6 @@
 <img width="676" height="608" alt="image" src="https://github.com/user-attachments/assets/a174cfb3-4690-4b3e-985b-7e11d70d8454" />
 
-🕵️ Windows систем дээр хурдан, аюулгүй forensic triage хийх PowerShell скрипт
+**🕵️ Windows систем дээр хурдан, аюулгүй forensic triage хийх PowerShell скрипт**
 
 Tatar_Quick_Triage.ps1 нь Windows endpoint дээр анхны forensic / incident response triage хийхэд зориулагдсан. Скрипт нь системийн, хэрэглэгчийн, процесс, сүлжээ, registry, event log болон browser artifact зэрэг чухал мэдээллүүдийг read-only аргаар цуглуулж, нэгтгэсэн тайлан үүсгэнэ.
 
