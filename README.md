@@ -72,13 +72,11 @@ C:\Forensic\
    
 1.1 cd Tatar-scripts
 
-PowerShell-ийг Administrator-аар нээх
+2. PowerShell-ийг Administrator-аар нээх
    
 2.1 Start Menu → Windows PowerShell → Right-click → Run as administrator
 
-эсвэл: Start-Process powershell -Verb RunAs
-
-Execution Policy
+эсвэл: Start-Process powershell -Verb RunAs Execution Policy
 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
 
