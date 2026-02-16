@@ -72,7 +72,7 @@ C:\Forensic\
    
 1.1 cd Tatar-scripts
 
-3. PowerShell-ийг Administrator-аар нээх
+PowerShell-ийг Administrator-аар нээх
    
 2.1 Start Menu → Windows PowerShell → Right-click → Run as administrator
 
@@ -96,6 +96,7 @@ Windows 10 / Windows 11
 PowerShell 5.1+ (PowerShell 7 дэмжинэ)
 
 Administrator privilege шаардлагатай
+
 
 *****Author*****
 
