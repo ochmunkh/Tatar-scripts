@@ -69,16 +69,21 @@ C:\Forensic\
 *****Ашиглах заавар*****
 
 1. git clone https://github.com/ochmunkh/Tatar-scripts.git
+   
 1.1 cd Tatar-scripts
 
-2. PowerShell-ийг Administrator-аар нээх
+3. PowerShell-ийг Administrator-аар нээх
+   
 2.1 Start Menu → Windows PowerShell → Right-click → Run as administrator
+
 эсвэл: Start-Process powershell -Verb RunAs
 
 Execution Policy
+
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
 
 Скрипт ажиллуулах
+
 cd C:\Path\To\Script
 .\Tatar_Quick_Triage.ps1
 Report: WinQuickTriage_<HOST>_<DATE>.txt
@@ -92,6 +97,7 @@ PowerShell 5.1+ (PowerShell 7 дэмжинэ)
 
 Administrator privilege шаардлагатай
 
+*****Author*****
 
 Enkhbat.O
 Security Analyst
